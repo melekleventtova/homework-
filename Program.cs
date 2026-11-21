@@ -1,39 +1,32 @@
-﻿using System.Threading.Channels;
+﻿using System.Reflection;
 
-List<int> numbers = Console.ReadLine().Split(',').Select(int.Parse).ToList();
-int add = int.Parse(Console.ReadLine());
-int remove = int.Parse(Console.ReadLine());
-int index= int.Parse(Console.ReadLine());
-Console.WriteLine("начален списък; " +string.Join(" ",numbers));
-numbers.Add(add);
-Console.WriteLine("след add " + string.Join(" ", numbers));
-numbers.Insert(0, add);
-Console.WriteLine("след Insers "+ string.Join(" ", numbers));
-if (numbers.Remove(remove))
+List<string> input = Console.ReadLine().Split(' ').ToList();
+List<int> numbers = new List<int>();
+foreach(string item in input)
 {
-    Console.WriteLine("след remove " + string.Join(" ", numbers));
-}
-else
-{
-    Console.WriteLine("числото липсва");
-}
-if (index >= 0 && index < numbers.Count)
-{
-    numbers.RemoveAt(index);
-    Console.WriteLine("след removeAt " + string.Join(" ", numbers));
-
+    numbers.Add(int.Parse(item));
 
 }
-else
-{
-    Console.WriteLine("невалиден индекс");
-}
-Console.WriteLine("крен брой елементи" + numbers.Count);
 for(int i = 0; i < numbers.Count; i++)
 {
-
-
-    Console.WriteLine(i + "." + numbers[i]);
+    Console.WriteLine(numbers[i]);
 }
+Console.WriteLine(" брой на всички числа: " + numbers.Count);
+List<int> newList = new List<int>();
+foreach(int number in numbers)
+{
+    if (number > 0 && number % 2 == 0 && !newList.Contains(number));
+    {
+        newList.Add(number);
+    }
+}
+Console.WriteLine("избрани числа: "+string.Join(",",newList));
+int sum = 0;
+foreach(int number in newList)
+{
+    sum += number;
+}
+Console.WriteLine(" брой на избеаните числа: " + newList.Count);
+Console.WriteLine(" сумата на избраните числа е "+ sum);
 
 
